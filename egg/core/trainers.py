@@ -42,9 +42,7 @@ class Trainer:
             train_data: DataLoader,
             validation_data: Optional[DataLoader] = None,
             device: torch.device = None,
-            callbacks: Optional[List[Callback]] = None,
-        validation_freq = 1,
-        device='cuda:0'
+            callbacks: Optional[List[Callback]] = None
     ):
         """
         :param game: A nn.Module that implements forward(); it is expected that forward returns a tuple of (loss, d),
@@ -61,8 +59,8 @@ class Trainer:
         self.train_data = train_data
         self.validation_data = validation_data
         common_opts = get_opts()
-        self.validation_freq = validation_freq
-        self.device = device if device is None else device
+        self.validation_freq = common_opts.validation_freq
+        self.device = common_opts.device if device is None else device
         self.game.to(self.device)
         # NB: some optimizers pre-allocate buffers before actually doing any steps
         # since model is placed on GPU within Trainer, this leads to having optimizer's state and model parameters
