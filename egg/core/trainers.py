@@ -43,8 +43,7 @@ class Trainer:
             validation_data: Optional[DataLoader] = None,
             device: torch.device = None,
             callbacks: Optional[List[Callback]] = None,
-        validation_freq = 1,
-        device='cuda:0'
+        validation_freq = 1
     ):
         """
         :param game: A nn.Module that implements forward(); it is expected that forward returns a tuple of (loss, d),
